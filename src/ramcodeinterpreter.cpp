@@ -99,6 +99,7 @@ int main(int args, char *argv[]) {
         std::string nspaceInstr = removeFirstSpace(label[label.size()-1]);
         std::vector<std::string> instructionData = stringSeparate(nspaceInstr, " ");
         instr.argType = ArgumentType::CONSTANT;
+        std::cout << "processing line" << instruction << std::endl;
         
         if (instructionData[0] == "load") {
             instr.type = CPUInstructionType::LOAD;
@@ -137,6 +138,7 @@ int main(int args, char *argv[]) {
             instr.type = CPUInstructionType::HALT;
             instr.argType = ArgumentType::LABELREF;
         } 
+        if (!(instr.type == CPUInstructionType::HALT)) {
         if (instr.argType == ArgumentType::CONSTANT) {
             LL ai;
             if (instructionData[1].rfind("^", 0) == 0) {
@@ -152,6 +154,7 @@ int main(int args, char *argv[]) {
             instr.argi = ai;
         } else {
             instr.args = instructionData[1];
+        }
         }
         //std::cout << instr.argi << std::endl;
         //std::cout << instr.type << std::endl;
